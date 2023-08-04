@@ -1,0 +1,30 @@
+<h1>All Tasks 😌</h1>
+<h2><%= @task.title %></h2>
+<p><%= @task.details %></p>
+<p><%= link_to "Edit this Task", edit_task_path(@task) %></p>
+<%= link_to "Back to All Tasks", tasks_path %>
+<p>
+  <%= link_to "Delete this Task", task_path(@task),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@task.title}?"}
+%>
+</p>
+
+<!-- Add the following JavaScript code at the bottom of your view -->
+<%# <script>
+  function deleteTask(event) {
+    event.preventDefault();
+    const deleteLink = event.target;
+    if (confirm("Are you sure you want to delete '" + deleteLink.dataset.taskTitle + "'?")) {
+      Rails.ajax({
+        type: 'delete',
+        url: deleteLink.href
+      });
+    }
+  }
+
+  const deleteLinks = document.querySelectorAll('.delete-task-link');
+  deleteLinks.forEach(link => {
+    link.addEventListener('click', deleteTask);
+    link.dataset.taskTitle = link.getAttribute('data-task-title');
+  });
+</script> %>
